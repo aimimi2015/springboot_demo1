@@ -2,13 +2,15 @@ package com.Demo.Controller;
 
 import com.Demo.VO.ProductInfoVO;
 import com.Demo.VO.ProductVO;
-import com.Demo.VO.ResultVO;
+//import com.Demo.VO.ResultVO;
 import com.Demo.common.ResponseCode;
 import com.Demo.common.ServerResponse;
 import com.Demo.dataobject.ProductCategory;
 import com.Demo.dataobject.ProductInfo;
 import com.Demo.service.CategoryService;
 import com.Demo.service.ProductService;
+//import com.Demo.utils.ResultVOUtil;
+import io.swagger.annotations.Api;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,17 +27,22 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/buyer/product")
+@Api(description = "用户管理")
 public class BuyerProductController {
 
-    @Autowired
-    private ProductService productService;
+    private final ProductService productService;
+
+    private final CategoryService categoryService;
 
     @Autowired
-    private CategoryService categoryService;
+    public BuyerProductController(ProductService productService, CategoryService categoryService) {
+        this.productService = productService;
+        this.categoryService = categoryService;
+    }
 
     @GetMapping("/list1")
     public ServerResponse list1() {
-        return ServerResponse.creatByError();
+        return ServerResponse.createByError();
     }
 
 
@@ -67,7 +74,8 @@ public class BuyerProductController {
                 if (productInfo.getCategoryType().equals(productCategory.getCategoryType())) {
                     ProductInfoVO productInfoVO = new ProductInfoVO();
 //                    productInfoVO.setProductDecription();
-                    BeanUtils.copyProperties(productInfo, productInfoVO);
+
+                    BeanUtils.copyProperties(productInfo,productInfoVO);
                     productInfoVOList.add(productInfoVO);
 
                 }

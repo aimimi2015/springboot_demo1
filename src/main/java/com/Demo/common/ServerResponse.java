@@ -9,27 +9,27 @@ import java.io.Serializable;
  */
 public class ServerResponse<T> implements Serializable {
 
-    private int status;
+    private int code;
     private String msg;
     private T data;
 
-    private ServerResponse(int status) {
-        this.status = status;
+    private ServerResponse(int code) {
+        this.code = code;
     }
 
-    private ServerResponse(int status, T data) {
-        this.status = status;
+    private ServerResponse(int code, T data) {
+        this.code = code;
         this.data = data;
     }
 
-    private ServerResponse(int status, String msg, T data) {
-        this.status = status;
+    private ServerResponse(int code, String msg, T data) {
+        this.code = code;
         this.msg = msg;
         this.data = data;
     }
 
-    private ServerResponse(int status, String msg) {
-        this.status = status;
+    private ServerResponse(int code, String msg) {
+        this.code = code;
         this.msg = msg;
     }
 
@@ -37,12 +37,12 @@ public class ServerResponse<T> implements Serializable {
     @JsonIgnore  //因为是public所以如果json序列化的时候也会和status;msg;data;一起显示到前端.使之不在json序列化中
 //    如果没有的话前端会有一个success:true
     public boolean isSuccess() {
-        return this.status == ResponseCode.SUCCCESS.getCode();
+        return this.code == ResponseCode.SUCCCESS.getCode();
 
     }
 
-    public int getStatus() {
-        return status;
+    public int getCode() {
+        return code;
     }
 
     public T getData() {
@@ -73,11 +73,11 @@ public class ServerResponse<T> implements Serializable {
     }
 
     //失败的响应
-    public static <T> ServerResponse<T> creatByError() {
+    public static <T> ServerResponse<T> createByError() {
         return new ServerResponse<T>(ResponseCode.ERROR.getCode(), ResponseCode.ERROR.getDesc());
 
     }
-    public static <T> ServerResponse<T> creatByErrorMessage(String errorMessage){
+    public static <T> ServerResponse<T> createByErrorMessage(String errorMessage){
         return new ServerResponse<T>(ResponseCode.ERROR.getCode(),errorMessage);
     }
 

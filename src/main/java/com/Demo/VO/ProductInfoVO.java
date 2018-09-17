@@ -3,6 +3,8 @@ package com.Demo.VO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * Created by ${aimimi2015} on 2018/8/10.
  */
@@ -10,18 +12,20 @@ import lombok.Data;
 public class ProductInfoVO {
 
     @JsonProperty("id")
-    private Integer productId;
+    private String productId;
 
     @JsonProperty("name")
-    private String productType;
-    @JsonProperty("price")
-    private Integer productPrice;
+    private String productName;
 
-    @JsonProperty("decription")
-    private String productDecription;
+    @JsonProperty("price")
+    private BigDecimal productPrice;
+
+    @JsonProperty("description")
+    private String productDescription;
 
     @JsonProperty("icon")
-    private Integer productIcon;
+    private String productIcon;
+
 
 }
 

@@ -19,4 +19,8 @@ public enum ProductStatusEnum {
         this.code = code;
         this.message = message;
     }
+
+    public Integer getCode() {
+        return code;
+    }
 }
